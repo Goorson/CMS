@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.34
+    container_name: CMS-container
+    ports:
+      - 3308:3306
+    volumes:
+      - ./DB/init:/docker-entrypoint-initdb.d
+      - ./DB:/db_resources
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      DB_HOST: localhost
+      DB_USER: root
+      DB_PASSWORD: password
