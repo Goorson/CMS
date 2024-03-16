@@ -3,7 +3,7 @@ create database timeTracker;
 
 USE timeTracker;
 
-CREATE TABLE `user` (
+CREATE TABLE `user1` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_username` varchar(255) DEFAULT NULL,
   `user_password` varchar(255) DEFAULT NULL,
