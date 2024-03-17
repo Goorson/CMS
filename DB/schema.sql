@@ -3,9 +3,9 @@ create database timeTracker;
 
 USE timeTracker;
 
-CREATE TABLE `user1` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
-  `user_username` varchar(255) DEFAULT NULL,
-  `user_password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+CREATE TABLE `Category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

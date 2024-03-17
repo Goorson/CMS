@@ -8,8 +8,8 @@ import jakarta.persistence.Id
 @Entity
 data class Site(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long,
 
     var name: String,
-    var logo: String? = null
+    var logo: String
 )

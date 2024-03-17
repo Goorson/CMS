@@ -26,6 +26,6 @@ class ProductServiceImpl(@Autowired private val productRepository: ProductReposi
     }
 
     override fun getAllProducts(): List<Product> {
-        TODO("Not yet implemented")
+        return productRepository.findAll()
     }
 }

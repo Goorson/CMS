@@ -6,12 +6,12 @@ import jdk.jfr.Category
 @Entity
 data class Product(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long,
 
     var name: String,
     var description: String,
 
     var categoryId: Int,
     var price: Double,
-    var picture: String? = null
+    var picture: String
 )
