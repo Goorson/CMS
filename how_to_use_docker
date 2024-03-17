@@ -7,7 +7,7 @@
 4. go into a folder of the project
 5. run docker command - "docker compose -f docker-compose.local.yaml up -d" (usually it takes a moment for the container to load and import db schema)
 6. connect to port 3308 (host:localhost, user: root, password: password) with mysql workbench
-7. load data from data.sql to the database
+7. load data from schema.sql and data.sql to the database
 8. IMPORTANT! after finishing work it's good to close the container "docker compose -f docker-compose.local.yaml down -v"
 
 USEFUL COMMANDS
