@@ -1,9 +1,9 @@
-drop database if exists timeTracker;
-create database timeTracker;
+drop database if exists cms;
+create database cms;
 
-USE timeTracker;
+USE cms;
 
-CREATE TABLE `Category` (
+CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,

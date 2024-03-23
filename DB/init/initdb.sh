@@ -29,3 +29,4 @@ check_mysql
 
 mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" < /db_resources/permission.sql
 mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" < /db_resources/schema.sql
+mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" < /db_resources/data.sql
