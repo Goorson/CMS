@@ -23,8 +23,8 @@ class WebSecurityConfig {
         http
             .authorizeHttpRequests { requests ->
                 requests
-                    .requestMatchers("/", "/home").authenticated()
-                    .anyRequest().authenticated()
+                    .requestMatchers("/login").permitAll()
+                    .anyRequest().hasRole("USER")
             }
             .formLogin { form ->
                 form
@@ -33,8 +33,11 @@ class WebSecurityConfig {
                     .permitAll()
             }
             .logout { logout ->
-                logout.permitAll()
+                logout
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll()
             }
+
 
         return http.build()
     }
