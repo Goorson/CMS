@@ -8,19 +8,25 @@
 <div id="fragment">
     <div class="header">
         <h2>Products</h2>
-        <button class="add-button" th:onclick="'addProduct()'">Add Product</button>
+        <button class="add-button" th:if="${isAdmin}" th:onclick="'addProduct()'">Add Product</button>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Product Category</th>
+            <th th:if="${isAdmin}">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
             <td data-label="Name" th:text="${product.name}">Product Name</td>
             <td data-label="Description" th:text="${product.description}">Product Description</td>
+            <td data-label="Category" th:text="${product.categoryName}">Product Category</td>
+            <td th:if="${isAdmin}" data-label="Actions">
+                <button th:onclick="'editProduct(' + ${product.id} + ')'">Edit</button>
+            </td>
         </tr>
         </tbody>
     </table>

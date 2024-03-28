@@ -1,14 +1,18 @@
 package CMS.app.service.impl
 
 import CMS.app.entity.Product
+import CMS.app.entity.ProductStructure
 import CMS.app.repository.ProductRepository
+import CMS.app.service.CategoryService
 import CMS.app.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class ProductServiceImpl(@Autowired private val productRepository: ProductRepository) : ProductService {
-    // Implement the methods here
+class ProductServiceImpl(
+    @Autowired private val productRepository: ProductRepository,
+    @Autowired private val categoryService: CategoryService,
+) : ProductService {
     override fun saveProduct(product: Product): Product {
         TODO("Not yet implemented")
     }
@@ -27,5 +31,23 @@ class ProductServiceImpl(@Autowired private val productRepository: ProductReposi
 
     override fun getAllProducts(): List<Product> {
         return productRepository.findAll()
+    }
+
+    override fun getAllProductStructures(): List<ProductStructure> {
+        val categories = categoryService.getAllCategories()
+        return productRepository.findAll().mapNotNull {
+            ProductStructure(
+                it.id,
+                it.name,
+                it.description,
+                categories.find { cat -> it.categoryId == cat.id }?.name.orEmpty(),
+                it.price,
+                it.picture
+            )
+        }
+    }
+
+    fun gowno(){
+
     }
 }

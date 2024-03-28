@@ -1,17 +1,17 @@
 package CMS.app.entity
 
-import jakarta.persistence.*
-import jdk.jfr.Category
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 
-@Entity
-data class Product(
+data class ProductStructure (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
     var name: String,
     var description: String,
 
-    var categoryId: Int,
+    var categoryName: String?,
     var price: Double,
     var picture: String?
 )

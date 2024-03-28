@@ -7,9 +7,9 @@
 <main class="container">
     <header class="heading">
         <div class="logo">LOGO</div>
-        <h1 class="nazwa" th:text="${websiteName}">NAME</h1>
+        <h1 class="nazwa"></h1>
         <div th:if="${#authentication.principal != 'anonymousUser'}">
-            <h4 th:text="${#authentication.name}">Username</h4>
+            <span th:text="${#authentication.name}">Username</span>
             <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Wyloguj" />
             </form>
@@ -18,7 +18,7 @@
     </header>
     <div class="content-area">
         <nav class="leftbar">
-            <button class="menu-btn" th:if="${isAdmin}" data-target="/settings">Ustawienia Sklepu</button>
+            <button class="menu-btn" data-target="/settings">Ustawienia Sklepu</button>
             <button class="menu-btn" data-target="/categories">Kategorie</button>
             <button class="menu-btn" data-target="/products">Produkty</button>
         </nav>
