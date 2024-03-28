@@ -1,8 +1,10 @@
 package com.example.securingweb
 
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+
 
 @Configuration
 class MvcConfig : WebMvcConfigurer {
@@ -14,4 +16,9 @@ class MvcConfig : WebMvcConfigurer {
         registry.addViewController("/prodcuts").setViewName("products")
         registry.addViewController("/auth/login").setViewName("login")
     }
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry.addResourceHandler("/uploads/**")
+            .addResourceLocations("file:uploads/")
+    }
+
 }

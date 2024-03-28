@@ -22,7 +22,7 @@ class WebSecurityConfig (
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers("/login").permitAll()
-                    .requestMatchers("/user").permitAll()
+                    .requestMatchers("/uploads/**").permitAll()
                     .anyRequest().authenticated()
             }
             .formLogin { form ->

@@ -11,9 +11,7 @@ INSERT INTO product (id, category_id, name, description, price) VALUES
 (3, 2, 'Fantasy Novel', 'A gripping tale of adventure and discovery.', 19.99);
 
 INSERT INTO site (name, logo) VALUES
-('Tech Gear', 'tech-gear-logo.png'),
-('Reader\'s Haven', 'readers-haven-logo.png'),
-('Kitchen Essentials', 'kitchen-essentials-logo.png');
+('WEBSITE', 'LOGO'),
 
 INSERT INTO user (id, username, role, password) VALUES
 (1, 'admin', 'ADMIN', '$2b$04$BBvwZZ06RFQxwb6.clulQOSh4rLlzErWns5YnfuMpOhqHw5TM/q82'),

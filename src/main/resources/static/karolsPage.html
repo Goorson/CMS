@@ -6,7 +6,9 @@
 <body>
 <main class="container">
     <header class="heading">
-        <div class="logo">LOGO</div>
+        <div th:if="${logo}">
+            <img th:src="@{'E:/Ucn/GitHub projects/SpringBootTutorial0/CMS/uploads/' + ${logo}}" alt="Website Logo" style="max-width: 100px; max-height: 100px;" />
+        </div>
         <h1 class="nazwa" th:text="${websiteName}">NAME</h1>
         <div th:if="${#authentication.principal != 'anonymousUser'}">
             <h4 th:text="${#authentication.name}">Username</h4>

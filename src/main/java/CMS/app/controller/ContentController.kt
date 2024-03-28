@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.util.UUID
 
 
 @Controller
@@ -31,18 +35,42 @@ class ContentController (
         return "settings"
     }
 
-    // todo for further save
     @PostMapping("/settings/save")
     fun saveSettings(
-        @RequestParam("siteName") siteName: String,
-        @RequestParam("sitePicture") sitePicture: MultipartFile
+        @RequestParam("siteName", required = false) siteName: String?,
+        @RequestParam("sitePicture", required = false) sitePicture: MultipartFile?,
+        redirectAttributes: RedirectAttributes
     ): String {
-        // Process and save the settings here
-        // For example, save the siteName and upload the sitePicture to a storage service
 
-        return "redirect:/main" // Redirect back to the settings page or another page
+        val siteSettings = siteService.getSiteData()
+
+        if (sitePicture != null && !sitePicture.isEmpty) {
+            if (sitePicture.isEmpty || sitePicture.size > 5_000_000) {
+                return "redirect:/main"
+            } else if (!sitePicture.contentType?.startsWith("image/")!!) {
+                return "redirect:/main"
+            }
+            try {
+                val logoFileName = UUID.randomUUID().toString() + "." + sitePicture.originalFilename?.split(".")?.last()
+                val uploadDir = Paths.get("uploads")
+                Files.createDirectories(uploadDir)
+                val filePath = uploadDir.resolve(logoFileName)
+                sitePicture.transferTo(filePath)
+
+                siteSettings.logo = logoFileName
+            } catch (e: Exception) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Failed to upload picture.")
+                return "redirect:/main"
+            }
+        }
+
+        siteName?.let {
+            siteSettings.name = it
+        }
+
+        siteService.changeSiteData(siteSettings)
+        return "redirect:/main"
     }
-
 
     @GetMapping("/categories")
     fun getCategories(model: Model): String {
