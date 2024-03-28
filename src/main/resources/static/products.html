@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products Fragment</title>
+    <link rel="stylesheet" href="css/contentspace.css">
+</head>
+<body>
+<div id="fragment">
+    <div class="header">
+        <h2>Products</h2>
+        <button class="add-button" th:onclick="'addProduct()'">Add Product</button>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td data-label="Name" th:text="${product.name}">Product Name</td>
+            <td data-label="Description" th:text="${product.description}">Product Description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

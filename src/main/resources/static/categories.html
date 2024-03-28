@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories Fragment</title>
+    <link rel="stylesheet" href="css/contentspace.css">
+</head>
+<body>
+<div id="Fragment">
+    <div class="header">
+        <h2>Categories</h2>
+        <button class="add-button" th:onclick="'addCategory()'">Add Category</button>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td data-label="Name" th:text="${category.name}">Category Name</td>
+            <td data-label="Description" th:text="${category.description}">Category Description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

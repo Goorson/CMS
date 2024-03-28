@@ -4,7 +4,9 @@ import CMS.app.entity.Site
 import CMS.app.repository.SiteRepository
 import CMS.app.service.SiteService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class SiteServiceImpl(
     @Autowired val siteRepository : SiteRepository
     ): SiteService {

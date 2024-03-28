@@ -19,6 +19,6 @@ class MainController (
             model.addAttribute("items", productService.getAllProducts())
             model.addAttribute("logo", "/path/to/your/logo.png")
             model.addAttribute("websiteName", "Your Website Name")
-            return "mainPage"
+            return "karolsPage"
         }
 }
