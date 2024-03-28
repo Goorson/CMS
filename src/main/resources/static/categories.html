@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories Fragment</title>
+    <link rel="stylesheet" href="css/contentspace.css">
+</head>
+<body>
+<div id="Fragment">
+    <div class="header">
+        <h2>Categories</h2>
+        <button class="add-category-button" onclick="togglePopup()">Add category</button>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="togglePopup()">&times;</span>
+                <form th:action="@{/addCategory}" method="post">
+                    <div><label for="categoryName">Nazwa:</label><input type="text" id="categoryName" name="categoryName" required></div>
+                    <div><label for="categoryDescription">Opis:</label><br><textarea id="categoryDescription" name="categoryDescription" rows="4" cols="50" required></textarea></div>
+                    <input type="submit" value="Dodaj">
+                </form>
+            </div>
+        </div>  
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td data-label="Name" th:text="${category.name}">Category Name</td>
+            <td data-label="Description" th:text="${category.description}">Category Description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="scriptPopUp.js"></script>
+</body>
+</html>

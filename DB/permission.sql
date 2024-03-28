@@ -1,1 +1,1 @@
-GRANT ALL PRIVILEGES ON tracker.* TO 'root'@'localhost';
+GRANT ALL PRIVILEGES ON cms.* TO 'root'@'localhost';

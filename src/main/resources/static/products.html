@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products Fragment</title>
+    <link rel="stylesheet" href="css/contentspace.css">
+</head>
+<body>
+<div id="fragment">
+    <div class="header">
+        <h2>Products</h2>
+        <button class="add-product-button" onclick="togglePopup()">Add Product</button>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="togglePopup()">&times;</span>
+                <form th:action="@{/addProduct}" method="post">
+                    <div><label for="productName">Nazwa:</label><input type="text" id="productName" name="productName" required></div>
+                    <div><label for="productDescription">Opis:</label><br><textarea id="productDescription" name="productDescription" rows="4" cols="50" required></textarea></div>
+                    <div><label for="productPrice">Cena:</label><input type="number" id="productPrice" name="productPrice" required></div>
+                    <div><label for="productCategory">Kategoria:</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="elektronika">Elektronika</option>
+                        <option value="moda">Moda</option>
+                        <option value="kuchnia">Kuchnia</option>
+                    </select></div>
+                    <div><label for="productImage">Zdjęcie:</label><input type="file" id="productImage" name="productImage"></div>
+                    <input type="submit" value="Dodaj">
+                </form>
+            </div>
+        </div>        
+
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td data-label="Name" th:text="${product.name}">Product Name</td>
+            <td data-label="Description" th:text="${product.description}">Product Description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="scriptPopUp.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${websiteName}"></title>
+</head>
+<body>
+<header>
+    <img th:src="${logo}" alt="Website Logo">
+    <h1 th:text="${websiteName}"></h1>
+    <button>    <a href="/logout">Logout</a></button>
+</header>
+
+<main>
+    <section id="categories">
+        <h2>Categories</h2>
+        <div th:each="category : ${categories}">
+            <h3 th:text="${category.name}"></h3>
+            <ul>
+                <li th:each="item : ${items}" th:text="${item.name}"></li>
+            </ul>
+        </div>
+    </section>
+</main>
+</body>
+</html>

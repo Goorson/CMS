@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="css/karolsPage.css">
+</head>
+<body>
+<main class="container">
+    <header class="heading">
+        <div class="logo">LOGO</div>
+        <h1 class="nazwa"></h1>
+        <div th:if="${#authentication.principal != 'anonymousUser'}">
+            <span th:text="${#authentication.name}">Username</span>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Wyloguj" />
+            </form>
+        </div>
+        <button th:if="${#authentication.principal == 'anonymousUser'}" onclick="location.href='/login'">Zaloguj się</button>
+    </header>
+    <div class="content-area">
+        <nav class="leftbar">
+            <button class="menu-btn" data-target="/settings">Ustawienia Sklepu</button>
+            <button class="menu-btn" data-target="/categories">Kategorie</button>
+            <button class="menu-btn" data-target="/products">Produkty</button>
+        </nav>
+        <section class="contentspace" id="contentspace"></section>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
+
