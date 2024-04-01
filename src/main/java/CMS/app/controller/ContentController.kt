@@ -1,15 +1,18 @@
 package CMS.app.controller
 
+import CMS.app.entity.Product
 import CMS.app.service.CategoryService
 import CMS.app.service.ProductService
 import CMS.app.service.SiteService
 import CMS.app.service.impl.UserDetailsServiceImpl
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
@@ -86,4 +89,24 @@ class ContentController (
 
         return "products"
     }
+
+    @PostMapping("/addProduct")
+    fun addProduct(
+        @ModelAttribute product: Product, // Assuming you have a proper binding
+        request: HttpServletRequest,
+        model: Model
+    ): String {
+        productService.saveProduct(product) // Save your product
+
+        model.addAttribute("products", productService.getAllProductStructures())
+        model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
+
+
+        return if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"), ignoreCase = true)) {
+            "products :: productList"
+        } else {
+            "products"
+        }
+    }
+
 }

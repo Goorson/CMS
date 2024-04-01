@@ -14,7 +14,7 @@ class ProductServiceImpl(
     @Autowired private val categoryService: CategoryService,
 ) : ProductService {
     override fun saveProduct(product: Product): Product {
-        TODO("Not yet implemented")
+        return productRepository.save(product)
     }
 
     override fun deleteProduct(id: Long) {
