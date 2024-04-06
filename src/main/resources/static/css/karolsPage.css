@@ -45,7 +45,7 @@ body {
 }
 
 .menu-btn {
-    background-color: #2196F3; /* Blue */
+    background-color: #2196F3;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -54,6 +54,10 @@ body {
     display: block;
     font-size: 16px;
     cursor: pointer;
+}
+
+.menu-btn-bottom {
+    margin-top: auto;
 }
 
 .contentspace {

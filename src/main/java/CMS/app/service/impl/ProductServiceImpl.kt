@@ -18,7 +18,7 @@ class ProductServiceImpl(
     }
 
     override fun deleteProduct(id: Long) {
-        TODO("Not yet implemented")
+        productRepository.deleteById(id)
     }
 
     override fun updateProduct(product: Product): Product {
