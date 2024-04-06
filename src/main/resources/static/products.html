@@ -5,62 +5,33 @@
     <link rel="stylesheet" href="css/contentspace.css">
 </head>
 <body>
-<div id="fragment">
-    <div class="header">
-        <h2>Products</h2>
-        <button class="add-button" th:if="${isAdmin}" onclick="togglePopup()">Add Product</button>
-    </div>
-    <div id="popup" class="popup" >
-        <div class="popup-content">
-            <span class="close" onclick="togglePopup()">&times;</span>
-            <form id="addProductForm" th:action="@{/addProduct}" method="post" enctype="multipart/form-data">
-                <div><label for="productName">Nazwa:</label><input type="text" id="productName" name="productName" required></div>
-                <div><label for="productDescription">Opis:</label><br><textarea id="productDescription" name="productDescription" rows="4" cols="50" required></textarea></div>
-                <div><label for="productPrice">Cena:</label><input type="number" id="productPrice" name="productPrice" required></div>
-                <div><label for="productCategory">Kategoria:</label>
-                    <select id="productCategory" name="productCategory" required>
-                        <option value="elektronika">Elektronika</option>
-                        <option value="moda">Moda</option>
-                        <option value="kuchnia">Kuchnia</option>
-                    </select></div>
-                <div><label for="productImage">Zdjęcie:</label><input type="file" id="productImage" name="productImage"></div>
-                <input type="submit" value="Add Product">
-            </form>
+    <div id="fragment">
+        <div class="header">
+            <h2>Products</h2>
+            <button class="add-button" th:if="${isAdmin}" onclick="togglePopup()">Add Product</button>
+        </div>
+        <div id="productList" th:fragment="productList">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Product Category</th>
+                    <th th:if="${isAdmin}">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td data-label="Name" th:text="${product.name}">Product Name</td>
+                    <td data-label="Description" th:text="${product.description}">Product Description</td>
+                    <td data-label="Category" th:text="${product.categoryName}">Product Category</td>
+                    <td th:if="${isAdmin}" data-label="Actions">
+                        <button th:onclick="'editProduct(' + ${product.id} + ')'">Edit</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div id="productList" th:fragment="productList">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Product Category</th>
-                <th th:if="${isAdmin}">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product : ${products}">
-                <td data-label="Name" th:text="${product.name}">Product Name</td>
-                <td data-label="Description" th:text="${product.description}">Product Description</td>
-                <td data-label="Category" th:text="${product.categoryName}">Product Category</td>
-                <td th:if="${isAdmin}" data-label="Actions">
-                    <button th:onclick="'editProduct(' + ${product.id} + ')'">Edit</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<script>
-function togglePopup() {
-    var x = document.getElementsByClassName("popup")[0]; // Select the first element with this class
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-
-</script>
 </body>
 </html>

@@ -6,6 +6,7 @@ import CMS.app.service.ProductService
 import CMS.app.service.SiteService
 import CMS.app.service.impl.UserDetailsServiceImpl
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
@@ -90,23 +91,34 @@ class ContentController (
         return "products"
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/products/save")
     fun addProduct(
-        @ModelAttribute product: Product, // Assuming you have a proper binding
-        request: HttpServletRequest,
-        model: Model
+        @ModelAttribute product: Product,
+        redirectAttributes: RedirectAttributes
     ): String {
-        productService.saveProduct(product) // Save your product
+        productService.saveProduct(product)
 
-        model.addAttribute("products", productService.getAllProductStructures())
+        // Use RedirectAttributes to add a success message
+        redirectAttributes.addFlashAttribute("successMessage", "Product added successfully!")
+
+        // Redirect back to the products page to refresh the content
+        return "redirect:/main"
+    }
+
+    @GetMapping("/productsList")
+    fun getProductList(model: Model): String {
+        model.addAttribute("products", productService.getAllProducts())
         model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
 
+        return "productList"
+    }
 
-        return if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"), ignoreCase = true)) {
-            "products :: productList"
-        } else {
-            "products"
-        }
+    @GetMapping("/productsForm")
+    fun getAddProductForm(model: Model): String {
+        model.addAttribute("categories", categoryService.getAllCategories())
+        model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
+
+        return "productForm"
     }
 
 }
