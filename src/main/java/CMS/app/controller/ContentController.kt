@@ -164,4 +164,11 @@ class ContentController (
 
         return "productForm"
     }
+    @GetMapping("/products/edit/{productId}")
+    fun getEditProductForm(model: Model, @PathVariable productId: Int): String {
+        model.addAttribute("categories", categoryService.getAllCategories())
+        model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
+
+        return "productForm"
+    }
 }
