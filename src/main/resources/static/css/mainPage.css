@@ -69,6 +69,10 @@ body {
     margin-top: auto;
 }
 
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
 .contentspace {
     flex-grow: 1;
     background-color: #ffffff;
@@ -89,4 +93,16 @@ body {
 
 .logout-btn:hover {
     background-color: #45a049;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Horizontally center the contents */
+}
+
+.username {
+    margin-right: 10px; /* Adds some space between the username and the logout button */
+    font-size: 16px; /* Matching font size to button text */
+    color: #333; /* Optional: Sets the color of the username text */
 }

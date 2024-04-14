@@ -10,9 +10,8 @@
             <img th:src="@{'/uploads/' + ${logo}}" alt="Website Logo" style="max-width: 100px; max-height: 100px;" />
         </div>
         <h1 class="nazwa" th:text="${websiteName}">NAME</h1>
-        <div th:if="${#authentication.principal != 'anonymousUser'}">
-            <h4 th:text="${#authentication.name}">Username</h4>
-        </div><div th:if="${#authentication.principal != 'anonymousUser'}">
+        <div th:if="${#authentication.principal != 'anonymousUser'}" class="user-actions">
+            <span class="username" th:text="${#authentication.name}">Username</span>
             <div class="logout-wrapper">
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" value="Wyloguj" class="logout-btn"/>

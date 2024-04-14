@@ -7,8 +7,6 @@ import CMS.app.service.impl.UserDetailsServiceImpl
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import java.nio.file.Paths
 
 @Controller
