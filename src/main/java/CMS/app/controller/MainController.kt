@@ -11,8 +11,6 @@ import java.nio.file.Paths
 
 @Controller
 class MainController (
-    val categoryService: CategoryService,
-    val productService: ProductService,
     val userDetailsServiceImpl: UserDetailsServiceImpl,
     val siteService: SiteService
 ){

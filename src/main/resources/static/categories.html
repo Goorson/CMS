@@ -20,9 +20,6 @@
         <tr th:each="category : ${categories}">
             <td data-label="Name" th:text="${category.name}">Category Name</td>
             <td data-label="Description" th:text="${category.description}">Category Description</td>
-            <td th:if="${isAdmin}" data-label="Actions">
-                <button th:onclick="'editProduct(' + ${category.id} + ')'">Edit</button>
-            </td>
         </tr>
         </tbody>
     </table>

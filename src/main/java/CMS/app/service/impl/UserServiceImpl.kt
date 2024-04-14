@@ -16,13 +16,12 @@ class UserServiceImpl(
     val userRepository: UserRepository,
     val passwordEncoder: PasswordEncoder
 ){
-
-    fun user(){
+    fun register(username: String, password: String){
         val user = User(
-            1,
-            "admin",
-            passwordEncoder.encode("pass"),
-            "ADMIN"
+            0,
+            username,
+            passwordEncoder.encode(password),
+            "USER"
         )
         userRepository.save(user)
     }

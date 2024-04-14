@@ -28,6 +28,8 @@ class WebSecurityConfig (
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers("/login").permitAll()
+                    .requestMatchers("/registerForm").permitAll()
+                    .requestMatchers("/register").permitAll()
                     .requestMatchers("/uploads/**").permitAll()
                     .anyRequest().authenticated()
             }
@@ -50,11 +52,4 @@ class WebSecurityConfig (
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
-//
-//    @Bean
-//    fun addResourceHandlers(registry: ResourceHandlerRegistry): ResourceHandlerRegistration {
-//        return registry
-//            .addResourceHandler("/resources/**")
-//            .addResourceLocations("/resources/")
-//    }
 }
