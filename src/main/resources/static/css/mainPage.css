@@ -18,8 +18,15 @@ body {
     padding: 0 20px;
 }
 
-.login-btn {
-    background-color: #4CAF50; /* Green */
+.logout-wrapper {
+    display: flex;
+    align-items: center; /* This will vertically center the button */
+    justify-content: center; /* This will horizontally center the button */
+    padding: 10px 0; /* Adds some padding around the form */
+}
+
+.logout-btn {
+    background-color: #4CAF50; /* Green, keeping consistent with your login button color */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -27,8 +34,10 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
+    border-radius: 5px; /* Adds rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Adds a subtle shadow for a 3D effect */
+    transition: background-color 0.3s; /* Smooth transition for mouse hover */
 }
 
 .content-area {
@@ -76,4 +85,8 @@ body {
         flex-basis: auto;
         width: 100%;
     }
+}
+
+.logout-btn:hover {
+    background-color: #45a049;
 }

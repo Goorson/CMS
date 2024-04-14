@@ -28,10 +28,10 @@
                     <td data-label="Description" th:text="${product.description}">Product Description</td>
                     <td data-label="Category" th:text="${product.categoryName}">Product Category</td>
                     <td th:if="${isAdmin}" data-label="Actions">
-                        <button class="menu-btn" th:attr="data-target=|@{/products/edit/{id}(id=${product.id})}|">Edit</button>
-                        <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display: inline;">
+                        <button type="button" class="action-btn edit-btn" th:attr="data-target=|@{/products/edit/{id}(id=${product.id})}|">Edit</button>
+                        <form class="action-btn delete-btn-form" th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display: inline;">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <button type="submit" class="delete-btn">Delete</button>
+                            <button type="submit" class="action-btn delete-btn">Delete</button>
                         </form>
                     </td>
                 </tr>

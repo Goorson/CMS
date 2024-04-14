@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="${websiteName}"></title>
+    <link rel="stylesheet" href="css/mainPage.css">
 </head>
 <body>
-<header>
-    <img th:src="${logo}" alt="Website Logo">
-    <h1 th:text="${websiteName}"></h1>
-    <button>    <a href="/logout">Logout</a></button>
-</header>
-
-<main>
-    <section id="categories">
-        <h2>Categories</h2>
-        <div th:each="category : ${categories}">
-            <h3 th:text="${category.name}"></h3>
-            <ul>
-                <li th:each="item : ${items}" th:text="${item.name}"></li>
-            </ul>
+<main class="container">
+    <header class="heading">
+        <div th:if="${logo}">
+            <img th:src="@{'/uploads/' + ${logo}}" alt="Website Logo" style="max-width: 100px; max-height: 100px;" />
         </div>
-    </section>
+        <h1 class="nazwa" th:text="${websiteName}">NAME</h1>
+        <div th:if="${#authentication.principal != 'anonymousUser'}">
+            <h4 th:text="${#authentication.name}">Username</h4>
+        </div><div th:if="${#authentication.principal != 'anonymousUser'}">
+            <div class="logout-wrapper">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Wyloguj" class="logout-btn"/>
+                </form>
+            </div>
+        </div>
+        <button th:if="${#authentication.principal == 'anonymousUser'}" onclick="location.href='/login'">Zaloguj się</button>
+    </header>
+    <div class="content-area">
+        <nav class="leftbar">
+            <button class="menu-btn" th:if="${isAdmin}" data-target="/settings">Ustawienia Sklepu</button>
+            <button class="menu-btn" data-target="/categories">Kategorie</button>
+            <button class="menu-btn" data-target="/products">Produkty</button>
+            <button class="menu-btn menu-btn-bottom" th:if="${isAdmin}" data-target="/productsForm">Dodaj produkt</button>
+    </nav>
+        <section class="contentspace" id="contentspace"></section>
+    </div>
 </main>
+<script src="app.js"></script>
 </body>
 </html>
+

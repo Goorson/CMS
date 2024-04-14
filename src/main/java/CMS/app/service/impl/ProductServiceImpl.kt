@@ -26,7 +26,7 @@ class ProductServiceImpl(
     }
 
     override fun getProductById(id: Long): Product? {
-        TODO("Not yet implemented")
+        return productRepository.findOneById(id)
     }
 
     override fun getAllProducts(): List<Product> {

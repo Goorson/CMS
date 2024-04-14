@@ -147,13 +147,10 @@ class ContentController (
         return "redirect:/main"
     }
 
-
-
     @GetMapping("/productsList")
     fun getProductList(model: Model): String {
         model.addAttribute("products", productService.getAllProducts())
         model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
-
         return "productList"
     }
 
@@ -161,14 +158,59 @@ class ContentController (
     fun getAddProductForm(model: Model): String {
         model.addAttribute("categories", categoryService.getAllCategories())
         model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
-
         return "productForm"
     }
     @GetMapping("/products/edit/{productId}")
     fun getEditProductForm(model: Model, @PathVariable productId: Int): String {
+        val product = productService.getProductById(productId.toLong()) // Fetch product details
+        model.addAttribute("product", product)
         model.addAttribute("categories", categoryService.getAllCategories())
         model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
+        return "editForm"
+    }
 
-        return "productForm"
+    @PostMapping("/products/update/{id}")
+    fun updateProduct(
+        @PathVariable id: Long,
+        @RequestParam("productName") name: String,
+        @RequestParam("productDescription") description: String,
+        @RequestParam("productPrice") price: Double,
+        @RequestParam("productCategory") categoryId: Int,
+        @RequestParam("productImage", required = false) picture: MultipartFile?,
+        redirectAttributes: RedirectAttributes
+    ): String {
+        if (picture != null && !picture.isEmpty) {
+            if (picture.isEmpty || picture.size > 5_000_000) {
+                return "redirect:/main"
+            } else if (!picture.contentType?.startsWith("image/")!!) {
+                return "redirect:/main"
+            }
+            try {
+                val logoFileName = UUID.randomUUID().toString() + "." + picture.originalFilename?.split(".")?.last()
+                val uploadDir = Paths.get("uploads")
+                Files.createDirectories(uploadDir)
+                val filePath = uploadDir.resolve(logoFileName)
+                picture.transferTo(filePath)
+
+                return logoFileName
+            } catch (e: Exception) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Failed to upload picture.")
+                return "redirect:/main"
+            }
+        }
+
+        val product = productService.getProductById(id)
+        if (product != null) productService.saveProduct(product.apply {
+            this.name = name
+            this.description = description
+            this.categoryId = categoryId
+            this.price = price
+            this.picture = ""
+        })
+
+
+        redirectAttributes.addFlashAttribute("successMessage", "Product added successfully!")
+
+        return "redirect:/main"
     }
 }

@@ -26,6 +26,6 @@ class MainController (
             model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
 
             val path = Paths.get("uploads").toAbsolutePath().toString()
-            return "karolsPage"
+            return "mainPage"
         }
 }
