@@ -20,5 +20,4 @@ class MvcConfig : WebMvcConfigurer {
         registry.addResourceHandler("/uploads/**")
             .addResourceLocations("file:uploads/")
     }
-
 }
