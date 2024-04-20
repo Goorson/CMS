@@ -162,7 +162,7 @@ class ContentController (
     }
     @GetMapping("/products/edit/{productId}")
     fun getEditProductForm(model: Model, @PathVariable productId: Int): String {
-        val product = productService.getProductById(productId.toLong()) // Fetch product details
+        val product = productService.getProductById(productId.toLong())
         model.addAttribute("product", product)
         model.addAttribute("categories", categoryService.getAllCategories())
         model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())

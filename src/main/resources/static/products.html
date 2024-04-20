@@ -20,6 +20,7 @@
                     <th>Description</th>
                     <th>Product Category</th>
                     <th th:if="${isAdmin}">Actions</th>
+                    <th th:if="${!isAdmin}">Buy</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,12 @@
                         <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display: inline;">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <button type="submit" class="delete-btn">Usuń</button>
+                        </form>
+                    </td>
+                    <td th:if="${!isAdmin}" data-label="Actions" style="white-space: nowrap;">
+                        <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display: inline;">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <button type="submit" class="delete-btn">Kup</button>
                         </form>
                     </td>
                 </tr>

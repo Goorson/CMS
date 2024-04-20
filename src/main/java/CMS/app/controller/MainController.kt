@@ -20,8 +20,6 @@ class MainController (
             model.addAttribute("logo", site.logo)
             model.addAttribute("websiteName", site.name)
             model.addAttribute("isAdmin", userDetailsServiceImpl.checkIfUserIsAdmin())
-
-            val path = Paths.get("uploads").toAbsolutePath().toString()
             return "mainPage"
         }
 }
