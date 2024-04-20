@@ -11,6 +11,7 @@
     <div id="fragment">
         <div class="header">
             <h2>Products</h2>
+            <button class="menu-btn menu-btn-bottom" th:if="${isAdmin}" data-target="/productsForm">Dodaj produkt</button>
         </div>
         <div id="productList" th:fragment="productList">
             <table class="table">
